@@ -3,3 +3,33 @@
 
 # Ignore node_modules directory
 node_modules/
+AppData/
+*.json
+*.jtx
+# System directories and files
+Application Data/
+Cookies/
+Documents/My Music/
+Documents/My Pictures/
+Documents/My Videos/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+OneDrive/
+Saved Games/
+Searches/
+Videos/
+
+# Miscellaneous
+.bash_history
+.bash_profile
+.bashrc
+.gitconfig
+.lesshst
+.viminfo
+.vscode/
