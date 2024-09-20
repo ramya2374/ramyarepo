@@ -1,0 +1,29 @@
+# Ignore system files and directories
+/Application Data/
+/Cookies/
+/Documents/My Music/
+/Documents/My Pictures/
+/Documents/My Videos/
+/Local Settings/
+/My Documents/
+/NetHood/
+/PrintHood/
+/Recent/
+/SendTo/
+/Start Menu/
+/Templates/
+/AppData/
+/Contacts/
+/Downloads/
+/Favorites/
+/Links/
+/Music/
+/NTUSER.DAT
+/OneDrive/
+/Saved Games/
+/Searches/
+/Videos/
+/ntuser.dat.*
+/ntuser.ini
+/oldassignments/
+/ramyagitbash/
