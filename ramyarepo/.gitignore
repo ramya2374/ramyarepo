@@ -15,3 +15,8 @@ node_modules/
 .lesshst
 .viminfo
 NTUSER.DAT*
+# Ignore files and directories outside the project
+/*
+!/ramyarepo/
+!/ITSE_2374_APP_2_FRONT/
+!/ramya_dev/
