@@ -1,0 +1,17 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+# Ignore Node modules if applicable
+node_modules/
+# Ignore Visual Studio Code files
+.vscode/
+# Ignore temporary files
+*.tmp
+# Ignore OS-specific files
+.bash_history
+.bash_profile
+.bashrc
+.gitconfig
+.lesshst
+.viminfo
+NTUSER.DAT*
