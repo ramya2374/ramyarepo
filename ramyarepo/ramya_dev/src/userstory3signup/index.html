@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Signup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Login Section -->
+  <div id="loginSection" class="container">
+    <h3>Login</h3>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" autocomplete="username" required>
+    <form id="loginForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" autocomplete="email" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+      <button type="submit">Login</button>
+      <p id="loginError" style="color:red; display:none;">Invalid credentials, please try again.</p>
+    </form>
+  </div>
+
+  <!-- Event Lists (Initially Hidden) -->
+  <div id="eventSection" class="container" style="display:none;">
+    <h1>Event Lists </h1>
+    <div id="eventsContainer">
+      <!-- Event Buttons will be generated dynamically here -->
+    </div>
+  </div>
+
+  <!-- Context Menu for Event Details -->
+  <div id="contextMenu" class="hidden">
+    <ul>
+      <li id="viewDescription">View Description</li>
+      <li id="signUpBtn">Sign Up</li>
+    </ul>
+  </div>
+
+  <!-- Modal for Event Details -->
+  <div id="descriptionModal" class="modal" style="display:none;">
+    <div>
+      <span id="closeModal">&times;</span>
+      <h2 id="eventName"></h2>
+      <p id="eventDate"></p>
+      <p id="eventTime"></p>
+      <p id="eventPlace"></p>
+      <p id="eventDescription"></p>
+      <button id="signUpModalBtn">Sign Up</button>
+    </div>
+  </div>
+  <div id="confirmationMessage" style="display: none;"> <!-- Confirmation Message -->
+    <button id="closeConfirmationMessage" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 10px; cursor: pointer; ">&times;</button>
+    <h3>Thank you for choosing this event!</h3>
+    <p>We will send the event details. Please join us on the event day.If you have any questions,feel free to contact us through email.</p>
+    <p>For more information, reach out to us at <strong>events@example.com</strong>.</p>
+</div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
