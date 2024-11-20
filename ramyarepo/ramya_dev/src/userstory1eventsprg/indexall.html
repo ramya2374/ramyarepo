@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventDetailspage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: beige;
+        }
+
+        #eventsContainer {
+
+            width: 30%;
+            text-align: center;
+
+            padding: 20px;
+            /* Optional: for spacing inside the container */
+            display: flex;
+            /* Enable Flexbox */
+            flex-direction: column;
+            /* Arrange items vertically */
+            align-items: center;
+            /* Center items horizontally */
+            margin: 150px -290px;
+            /* Center horizontally */
+            width: 75%;
+            /* Width of the container */
+            gap: 20px;
+            /* Adjust this value for the desired gap between buttons */
+            text-align: center;
+            /* Center text inside */
+            pointer-events: auto;
+
+        }
+
+        .event-button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display:inline-block;
+        }
+        .hidden {
+    display: none;
+}
+
+        #contextMenu {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+            z-index: 1000;
+        }
+
+        #contextMenu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #contextMenu li {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        #contextMenu li:hover {
+            background-color: #f0f0f0;
+        }
+
+        #descriptionModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 1001;
+            width: 300px;
+        }
+
+        #closeModal {
+            cursor: pointer;
+            color: red;
+            float: right;
+        }
+
+        /* Media query for tablet and larger devices */
+        @media (min-width: 768px) {
+            #eventsContainer {
+                flex-direction: column;
+                /* Arrange items in a row */
+                flex-wrap: wrap;
+                /* Allow wrapping of items */
+                width: 60%;
+                /* Adjust width */
+            }
+
+            .event-button {
+                flex: 1 1 30%;
+                /* Grow, shrink, and take up about 30% of the container */
+                margin: 10px;
+                /* Margin for spacing between buttons */
+            }
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 767px) {
+            #eventsContainer {
+                width: 90%;
+                /* Full width on mobile */
+            }
+
+            .event-button {
+                width: 100%;
+                /* Full width on mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="eventsContainer">
+        <div class="event-button" data-name="Eve001A" data-date="2024-10-24" data-time="10:00 AM"
+            data-place="Community Park" data-description="Celebrate the autumn harvest with local vendors, fresh produce, and family-friendly activities. Enjoy live music, craft booths, and delicious food from farm-to-table stalls.">
+            Eve001A
+        </div>
+        <div class="event-button" data-name="Eve002A" data-date="2024-10-25" data-time="2:00 PM" data-place="Convention Center"
+            data-description=" Join us for a day of showcasing the latest advancements in technology. Explore innovative products, attend workshops, and network with industry leaders. Ideal for tech enthusiasts and professionals alike!">
+            Eve002A
+        </div>
+        <div class="event-button" data-name="Eve003A" data-date="2024-10-26" data-time="1:00 PM" data-place="Grand Ballroom"
+            data-description="Experience a magical evening filled with holiday cheer! Enjoy a gourmet dinner, live entertainment, and a silent auction, all in support of local charities. Dress in your finest winter attire!">
+            Eve003A
+        </div>
+        <div class="event-button" data-name="Eve004A" data-date="2024-10-27" data-time="11:00 AM"
+            data-place="City Art Gallery" data-description="Sip and savor at our annual Art & Wine Festival! Sample exquisite wines from local vineyards while browsing stunning artworks by talented artists. Enjoy live painting demonstrations and food pairings throughout the day.">
+            Eve004A
+        </div>
+        <div class="event-button" data-name="Eve005A" data-date="2024-10-28" data-time="3:00 PM" data-place="Downtown Community Center"
+            data-description="Discover new ways to enhance your well-being! Participate in health screenings, fitness classes, and informative workshops led by health professionals. Bring the whole family for a day of health, fun, and wellness tips!">
+            Eve005A
+        </div>
+        <!-- Add more event buttons here -->
+    </div>
+
+    <div id="contextMenu" class="hidden">
+        <ul>
+            <li id="viewDescription">View Description</li>
+        </ul>
+    </div>
+
+    <div id="descriptionModal">
+        <span id="closeModal">&times;</span>
+        <h2 id="eventName"></h2>
+        <p id="eventDate"></p>
+        <p id="eventTime"></p>
+        <p id="eventPlace"></p>
+        <p id="eventDescription"></p>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    const eventsContainer = document.getElementById('eventsContainer');
+    const contextMenu = document.getElementById('contextMenu');
+    const descriptionModal = document.getElementById('descriptionModal');
+    const closeModal = document.getElementById('closeModal');
+
+    // Array of event IDs you want to fetch
+    const eventIds = ['Eve001A', 'Eve002A', 'Eve003A', 'Eve004A', 'Eve005A'];
+
+    // Fetch details for all events on page load
+    eventIds.forEach(eventId => {
+        fetchEventDetails(eventId);
+    });
+
+    // Hide the context menu by default
+    contextMenu.classList.add('hidden');
+
+    // Context menu functionality
+    eventsContainer.addEventListener('contextmenu', function (event) {
+        event.preventDefault(); // Prevent the default context menu
+
+        const clickedEvent = event.target.closest('.event-button');
+        if (clickedEvent) {
+            // Set position of context menu
+            contextMenu.style.top = `${event.clientY}px`;
+            contextMenu.style.left = `${event.clientX}px`;
+            contextMenu.classList.remove('hidden'); // Show the context menu
+
+            // Store the event ID in the context menu for later use
+            const eventId = clickedEvent.getAttribute('data-event-id');
+            contextMenu.setAttribute('data-event-id', eventId);
+        } else {
+            contextMenu.classList.add('hidden'); // Hide if clicked elsewhere
+        }
+    });
+
+    // Click event for the context menu item
+    document.getElementById('viewDescription').onclick = async function () {
+        const eventId = contextMenu.getAttribute('data-event-id');
+        if (eventId) {
+            await fetchEventDetails(eventId); // Fetch event details
+        } else {
+            console.error('No event ID found!'); // Error log
+        }
+        contextMenu.classList.add('hidden'); // Hide context menu after showing details
+    };
+
+    // Fetch event details from the backend API
+async function fetchEventDetails(eventId) {
+    try {
+        const response = await fetch(`https://itse-2374-app-2-back-2bgx.onrender.com/api/events/${eventId}`);
+
+        // Check if the response is OK
+        if (!response.ok) {
+            // Handle specific status codes if necessary
+            if (response.status === 404) {
+                throw new Error('Event not found. Please check the event ID.');
+            } else {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        }
+
+        const eventDetails = await response.json(); // Parse JSON response
+        displayEvent(eventDetails); // Call function to display event details
+    } catch (error) {
+        console.error('Error fetching event details:', error);
+        alert(`Failed to fetch event details: ${error.message}. Please try again later.`);
+    }
+}
+
+    // Function to display each event in the events container
+    function displayEvent(eventDetails) {
+        const eventElement = document.createElement('div');
+        eventElement.classList.add('event-button'); // Add a class for styling
+        eventElement.setAttribute('data-event-id', eventDetails.id); // Set data attribute for the event ID
+
+        eventElement.innerHTML = `
+            <h3>${eventDetails.name}</h3>
+            <p>Date: ${eventDetails.date}</p>
+            <p>Time: ${eventDetails.time}</p>
+            <p>Place: ${eventDetails.place}</p>
+            <p>Description: ${eventDetails.description}</p>
+            <button class="view-details">View Details</button>
+        `;
+
+        eventsContainer.appendChild(eventElement); // Append the event to the container
+
+        // Add click event listener for the "View Details" button
+        eventElement.querySelector('.view-details').onclick = function () {
+            showEventDetails(eventDetails); // Show details in modal
+        };
+    }
+
+    function showEventDetails(eventDetails) {
+        document.getElementById('eventName').textContent = `Name: ${eventDetails.name}`;
+        document.getElementById('eventDate').textContent = `Date: ${eventDetails.date}`;
+        document.getElementById('eventTime').textContent = `Time: ${eventDetails.time}`;
+        document.getElementById('eventPlace').textContent = `Place: ${eventDetails.place}`;
+        document.getElementById('eventDescription').textContent = `Description: ${eventDetails.description}`;
+
+        descriptionModal.style.display = 'block'; // Show the modal
+    }
+
+    // Close modal functionality
+    closeModal.onclick = function () {
+        descriptionModal.style.display = 'none'; // Hide the modal
+    };
+
+    // Hide context menu when clicking anywhere else
+    window.onclick = function (event) {
+        if (event.target !== contextMenu && !contextMenu.contains(event.target)) {
+            contextMenu.classList.add('hidden'); // Hide context menu
+        }
+    };
+
+    // Close modal with Esc key
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            descriptionModal.style.display = 'none'; // Hide the modal
+        }
+    });
+});
+
+    </script>
+</body>
+
+</html>

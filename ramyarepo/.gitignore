@@ -1,0 +1,32 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Node modules if applicable
+node_modules/
+
+# Ignore Visual Studio Code files
+.vscode/
+
+# Ignore temporary files
+*.tmp
+
+# Ignore OS-specific files
+.bash_history
+.bash_profile
+.bashrc
+.gitconfig
+.lesshst
+.viminfo
+NTUSER.DAT*
+
+# Ignore files and directories outside the project
+/*
+# But keep these directories
+!ramyarepo/
+!ramya_dev/
+!ITSE_2374_APP_2_FRONT/
+
+# If there are subdirectories you want to track within these directories, add them here:
+!ramya_dev/src/
+!ITSE_2374_APP_2_FRONT/src/

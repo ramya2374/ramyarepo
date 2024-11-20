@@ -1,0 +1,279 @@
+/* General body styling */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body,html {
+  font-family: Arial, sans-serif;
+  background-color: beige;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login Section Styling */
+#loginSection {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+h3 {
+  text-align: center;
+}
+
+input[type=text],input[type="email"], input[type="password"], button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#loginError {
+  color: red;
+  display: none;
+}
+
+/* Event List Styling */
+#eventSection {
+  display: flex;
+  flex-direction: column;  /* Stack items vertically */
+  align-items: flex-start;  /* Align content to the left */
+  width: 300px; /* Ensure the event list is the same width as the login section */
+  margin-left: -720px; /* Space from the left */
+  
+
+}
+h1 {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #333;
+  text-align: left; /* Align heading to the left */
+  margin-bottom: 20px;
+}
+.event-list {
+  width: 30%;
+  padding: 20px;
+  border-right: 2px solid #ccc;
+}
+
+.event-list h1 {
+  margin-bottom: 20px;
+}
+
+#eventsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+  
+}
+
+.event-button {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.event-button:hover {
+  background-color: #0056b3;
+}
+
+/* Context Menu Styling */
+#contextMenu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  padding: 10px;
+  width:180px;
+}
+#contextMenu.hidden {
+  display: none; /* Ensure hidden class hides the menu */
+}
+
+#contextMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#contextMenu li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#contextMenu li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Modal Styling */
+#descriptionModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%;
+  display: none;
+  z-index: 1000;
+}
+
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#descriptionModal button {
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #61676d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#descriptionModal button:hover {
+  background-color: #454e58;
+}
+/* Center the Thank You message */
+#confirmationMessage {
+  display: none;
+  position: fixed; /* Makes it overlay on top of the content */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust positioning to center it */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 40%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Styling for the close button */
+#closeConfirmationMessage {
+  position: absolute;
+  top: 45px;
+  right: 25px;
+  background-color: #e74c3c; /* Red color */
+  color: white;
+  border: none;
+  width: 25px; /* Size of the button */
+  height: 25px; /* Size of the button */
+  border-radius: 60%; /* Make the button circular */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the '×' inside the button */
+  cursor: pointer;
+  font-size: 25px; /* Size of the '×' character */
+  padding: 0; /* Remove any internal padding */
+}
+
+#closeConfirmationMessage:hover {
+  background-color: #641c14; /* Darker red on hover */
+}
+
+/* Optional: Add focus styles for accessibility */
+#closeConfirmationMessage:focus {
+  outline: none;
+}
+/* Tablet Devices (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Center the event section and its contents */
+  #eventSection {
+    max-width: 960px; /* Limit the width for larger tablets */
+    padding: 20px; /* Padding around the section */
+    margin:35px;
+   
+  }
+
+  h1 {
+    font-size: 2rem; /* Adjust the font size of the heading */
+    text-align: center; /* Center the heading */
+  }
+
+  /* Adjust event button width and padding for tablets */
+  .event-button {
+    width: 90%;  /* Adjust the width of event buttons */
+    padding: 9px; /* Slightly bigger padding */
+    font-size: 1.2rem; /* Slightly bigger font size */
+  }
+  
+  /* Center event container on the screen */
+  #eventsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Ensure events are centered horizontally */
+  }
+}
+
+/* Media query for devices with width 375px and smaller (iPhone SE and similar small devices) */
+@media (min-width: 375px) and (max-width: 675px) {
+  /* Adjust event section layout for smaller screens */
+  #eventSection {
+    max-width: 280px;  /* Smaller max-width */
+    /* Full width on smaller devices */
+    padding: 20px;
+    margin: 35px; /* Reduced margin for tighter space */
+  }
+
+  h1 {
+    font-size: 1.3rem; /* Smaller font size for the event list heading */
+   /* Adjust margin for better fit */
+    text-align: center;
+  }
+
+  #eventsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Smaller gap between event buttons */
+    align-items: center;
+  }
+
+  .event-button {
+    width: 90%;  /* Adjust event button width for smaller screens */
+    padding: 8px;
+    font-size: 0.9rem; /* Slightly smaller font size */
+    text-align: center;
+  }
+
+  .event-button:hover {
+    background-color: #007BFF;
+    color: white;
+  }
+}
